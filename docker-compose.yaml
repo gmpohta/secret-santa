@@ -5,6 +5,8 @@ services:
       dockerfile: docker/php/Dockerfile
       args:
         TZ: ${TZ}
+    depends_on:
+      - redis
     volumes:
       - .:/var/www/html:cached
       - php_socket:/var/run/php
@@ -19,7 +21,16 @@ services:
       - php_socket:/var/run/php
     ports:
       - '${APP_EXT_PORT}:80'
+  
+  redis:
+    image: 'redis:alpine'
+    logging:
+      options:
+        max-size: 50m
+    restart: always
+    volumes:
+      - redis:/data
 
 volumes:
-  lms_db: ~
+  redis: ~
   php_socket: ~

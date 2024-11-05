@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Serializer;
 
-use App\Shared\Serializer\SerializerInterface;
+use App\Domain\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;

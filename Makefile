@@ -13,8 +13,6 @@ locally:;@:
 
 create: ## Собрать и запустить проект
 	$(MAKE) up
-	$(EXEC_PHP) bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
-	$(MAKE) db
 
 vendor: composer.json composer.lock ## Собрать vendor
 	$(EXEC_PHP) composer install
