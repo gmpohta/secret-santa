@@ -1,0 +1,79 @@
+{
+    "name": "gmpohta/secret-santa",
+    "license": "proprietary",
+    "type": "project",
+    "require": {
+        "php": ">=8.3",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "psr/log": "^3.0",
+        "ramsey/uuid": "^4.7",
+        "symfony/console": "~7.0.0",
+        "symfony/dotenv": "~7.0.0",
+        "symfony/event-dispatcher": "~7.0.0",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "~7.0.0",
+        "symfony/http-foundation": "~7.0.0",
+        "symfony/http-kernel": "~7.0.0",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/routing": "~7.0.0",
+        "symfony/runtime": "~7.0.0",
+        "symfony/serializer": "~7.0.0",
+        "symfony/validator": "~7.0.0",
+        "symfony/yaml": "~7.0.0"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.42",
+        "friendsofphp/php-cs-fixer": "^3.58",
+        "icanhazstring/composer-unused": "^0.8.11",
+        "maglnet/composer-require-checker": "^4.11",
+        "phpunit/phpunit": "^10.5",
+        "psalm/plugin-phpunit": "^0.19.0",
+        "psalm/plugin-symfony": "^5.1",
+        "rector/rector": "^1.1",
+        "symfony/web-profiler-bundle": "7.0.0",
+        "vimeo/psalm": "^5.24"
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true,
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.0.*"
+        }
+    }
+}
