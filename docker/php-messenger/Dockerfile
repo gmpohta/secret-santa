@@ -1,3 +1,4 @@
+#syntax=docker/dockerfile:1.4
 FROM php:8.3.0-fpm-alpine3.17
 
 ARG TZ
@@ -13,11 +14,14 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions @composer opcache redis intl pcov pcntl gd amqp && \
     ln -s composer /usr/local/bin/c
 
-COPY --link docker/php/php.ini $PHP_INI_DIR/conf.d/
-COPY --link docker/php/fpm.conf /usr/local/etc/php-fpm.d/zzz-docker.conf
+COPY --link docker/php-messenger/php.ini $PHP_INI_DIR/conf.d/
+COPY --link docker/php-messenger/fpm.conf /usr/local/etc/php-fpm.d/zzz-docker.conf
 
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && sed -i "s/;date.timezone =.*/date.timezone = $TZ/g" $PHP_INI_DIR/php.ini
+
+RUN apk add supervisor 
+COPY ./docker/php-messenger/supervisord.conf /etc/supervisor/
 
 RUN addgroup -g 1000 phpgroup && \
     adduser -G phpgroup -u 1000 -D phpuser
@@ -27,3 +31,5 @@ RUN mkdir /var/run/php && \
     chown -R phpuser:phpgroup /var/www/html
 
 USER phpuser
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

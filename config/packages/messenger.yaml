@@ -1,0 +1,22 @@
+framework:
+    messenger:
+        routing:
+            App\Domain\Messages\Message: async_transport
+            App\Domain\Messages\Message2: async_transport2
+            App\Domain\Messages\FailedMessage: failed_transport
+        transports:
+            async_transport:
+                dsn: '%env(DSN)%async_transport'
+                retry_strategy:
+                    max_retries: 1
+                    delay: 1000
+            async_transport2:
+                dsn: '%env(DSN)%async_transport2'
+                retry_strategy:
+                    max_retries: 1
+                    delay: 1000
+            failed_transport:
+                dsn: '%env(DSN)%failed_transport'
+                retry_strategy:
+                    max_retries: 1
+                    delay: 1000

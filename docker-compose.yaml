@@ -30,7 +30,30 @@ services:
     restart: always
     volumes:
       - redis:/data
+    
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+      - 15672:15672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq/
+
+  php-messenger:
+    build:
+      context: .
+      dockerfile: docker/php-messenger/Dockerfile
+      args:
+        TZ: ${TZ}
+    logging:
+      options:
+        max-size: 50m
+    restart: always
+    depends_on:
+      - redis
+    volumes:
+      - .:/var/www/html:cached
 
 volumes:
   redis: ~
   php_socket: ~
+  rabbitmq: ~
